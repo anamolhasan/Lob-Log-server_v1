@@ -37,6 +37,16 @@ model User {
 
   // one - to - many
   usageLogs UsageLog[]
+  // one - to - one
+  profile   Profile?
+}
+
+model Profile {
+  id          String    @id @default(uuid())
+  bio         String?
+  dateOfBirth DateTime?
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id])
 }
 
 model Equipment {
